@@ -1,0 +1,12 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Register Page{% endblock %}
+
+{% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+{% endblock %}
