@@ -22,6 +22,11 @@ def register(request):
     }
     return render(request, 'users/register.html', context)
 
+class UserListView(ListView):
+    model = User
+    template_name = 'users/home.html'
+    context_object_name = 'users'
+
     
 
 # Create your views here.

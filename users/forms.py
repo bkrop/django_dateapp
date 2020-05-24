@@ -19,5 +19,5 @@ class ProfileForm(forms.ModelForm):
         widgets = {
             'date_of_birth': DateInput()
         }
-        fields = ['date_of_birth', 'gender']
+        fields = ['date_of_birth', 'gender', 'description']
         
