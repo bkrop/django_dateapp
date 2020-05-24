@@ -17,7 +17,8 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         widgets = {
-            'date_of_birth': DateInput()
+            'date_of_birth': DateInput(),
+            'gender_pref': forms.RadioSelect
         }
-        fields = ['date_of_birth', 'gender', 'description']
+        fields = ['date_of_birth', 'gender', 'description', 'gender_pref']
         

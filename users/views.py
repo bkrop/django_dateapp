@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import UserRegisterForm, ProfileForm
 from django.contrib.auth.models import User
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView, UpdateView
+from .models import Profile
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 def register(request):
     if request.method == 'POST':
@@ -27,6 +29,21 @@ class UserListView(ListView):
     template_name = 'users/home.html'
     context_object_name = 'users'
 
-    
+class ProfileDetailView(DetailView):
+    model = User
+    template_name = 'users/profile.html'
 
-# Create your views here.
+    def get_object(self): # służy do 'uchwycenia' obiektu
+        user = super().get_object()
+        return user
+
+class ProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Profile
+    template_name = 'users/update_profile.html'
+    fields = ['description', 'gender_pref']
+
+    def test_func(self):
+        profile = self.get_object()
+        if self.request.user.profile == profile:
+            return True
+        return False
