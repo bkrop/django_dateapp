@@ -8,6 +8,6 @@
     <p>Gender: {{ user.profile.gender }}</p>
     <p>Age: {{ user.profile.get_age }}</p>
     {% if request.user.profile == user.profile %}
-        <small><a href="{% url 'update-profile' pk=request.user.profile.id %}">Update profile</a></small>
+        <small><a href="{% url 'update-profile' pk=request.user.profile.pk %}">Update profile</a></small>
     {% endif %}
 {% endblock %}

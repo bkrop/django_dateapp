@@ -29,8 +29,8 @@ class UserListView(ListView):
     template_name = 'users/home.html'
     context_object_name = 'users'
 
-class ProfileDetailView(DetailView):
-    model = User
+class ProfileDetailView(LoginRequiredMixin, DetailView):
+    model = Profile
     template_name = 'users/profile.html'
 
     def get_object(self): # służy do 'uchwycenia' obiektu

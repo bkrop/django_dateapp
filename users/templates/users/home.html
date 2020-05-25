@@ -4,8 +4,14 @@
 
 {% block content %}
     {% for user in users %}
-        <h2>{{ user.first_name }}</h2>
-        <p>{{ user.profile.get_age }}</p>
-        <p>{{ user.profile.gender }}</p>
+        {% if request.user.profile.gender_pref == user.profile.gender|add:'s' and user != request.user %}
+            <h2>{{ user.first_name }}</h2>
+            <p>{{ user.profile.get_age }}</p>
+            <p>{{ user.profile.gender }}</p>
+        {% elif request.user.profile.gender_pref == 'Both' and user != request.user %}
+            <h2>{{ user.first_name }}</h2>
+            <p>{{ user.profile.get_age }}</p>
+            <p>{{ user.profile.gender }}</p>
+        {% endif %}
     {% endfor %}
 {% endblock %}
