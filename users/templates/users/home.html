@@ -4,14 +4,19 @@
 
 {% block content %}
     {% for user in users %}
-        {% if request.user.profile.gender_pref == user.profile.gender|add:'s' and user != request.user %}
+        {% if request.user.profile.gender_pref == user.profile.gender|add:'s' and user != request.user and user.id not in likes %}
             <h2>{{ user.first_name }}</h2>
             <p>{{ user.profile.get_age }}</p>
             <p>{{ user.profile.gender }}</p>
-        {% elif request.user.profile.gender_pref == 'Both' and user != request.user %}
+            <form action="{% url 'like' receiver_id=user.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Like</button>
+            </form>
+        {% elif request.user.profile.gender_pref == 'Both' and user != request.user and user.id not in likes %}
             <h2>{{ user.first_name }}</h2>
             <p>{{ user.profile.get_age }}</p>
             <p>{{ user.profile.gender }}</p>
         {% endif %}
     {% endfor %}
+    <p>{{ likes }}</p>
 {% endblock %}

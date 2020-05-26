@@ -3,6 +3,7 @@ from .forms import UserRegisterForm, ProfileForm
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, UpdateView
 from .models import Profile
+from likes.models import Like
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 def register(request):
@@ -28,6 +29,11 @@ class UserListView(ListView):
     model = User
     template_name = 'users/home.html'
     context_object_name = 'users'
+
+    def get_context_data(self, **kwargs):
+        context = super(UserListView, self).get_context_data(**kwargs) # get the default context data
+        context['likes'] = self.request.user.likes_given.all().values_list('receiver', flat=True) # add extra field to the context
+        return context
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = Profile
