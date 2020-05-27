@@ -4,7 +4,7 @@
 
 {% block content %}
     {% for user in users %}
-        {% if request.user.profile.gender_pref == user.profile.gender|add:'s' and user != request.user and user.id not in likes %}
+        {% if request.user.profile.gender_pref == user.profile.gender|add:'s' and user != request.user and user.id not in likes and user.id not in dislikes %}
             <h2>{{ user.first_name }}</h2>
             <p>{{ user.profile.get_age }}</p>
             <p>{{ user.profile.gender }}</p>
@@ -12,11 +12,22 @@
                 {% csrf_token %}
                 <button type="submit">Like</button>
             </form>
-        {% elif request.user.profile.gender_pref == 'Both' and user != request.user and user.id not in likes %}
+            <form action="{% url 'dislike' receiver_id=user.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Dislike</button>
+            </form>
+        {% elif request.user.profile.gender_pref == 'Both' and user != request.user and user.id not in likes and user.id not in dislikes %}
             <h2>{{ user.first_name }}</h2>
             <p>{{ user.profile.get_age }}</p>
             <p>{{ user.profile.gender }}</p>
+            <form action="{% url 'like' receiver_id=user.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Like</button>
+            </form>
+            <form action="{% url 'dislike' receiver_id=user.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Dislike</button>
+            </form>
         {% endif %}
     {% endfor %}
-    <p>{{ likes }}</p>
 {% endblock %}
