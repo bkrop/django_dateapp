@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'users.apps.UsersConfig',
     'likes.apps.LikesConfig',
-    'matches.apps.MatchesConfig'
+    'matches.apps.MatchesConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
