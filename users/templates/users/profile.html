@@ -3,11 +3,11 @@
 {% block title %}Profile Page{% endblock %}
 
 {% block content %}
-    <h1>{{ user.first_name }}'s Profile</h1>
-    <p>Description: {{ user.profile.description }}</p>
-    <p>Gender: {{ user.profile.gender }}</p>
-    <p>Age: {{ user.profile.get_age }}</p>
-    {% if request.user.profile == user.profile %}
+    <h1>{{ object.user.first_name }}'s Profile</h1>
+    <p>Description: {{ object.description }}</p>
+    <p>Gender: {{ object.gender }}</p>
+    <p>Age: {{ object.get_age }}</p>
+    {% if request.user.profile == object %}
         <small><a href="{% url 'update-profile' pk=request.user.profile.pk %}">Update profile</a></small>
     {% endif %}
 {% endblock %}

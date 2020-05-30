@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserRegisterForm, ProfileForm
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, UpdateView
@@ -35,13 +35,9 @@ class UserListView(LoginRequiredMixin, ListView):
         context['dislikes'] = self.request.user.dislikes_given.all().values_list('receiver', flat=True)
         return context
 
-class ProfileDetailView(LoginRequiredMixin, DetailView):
+class ProfileDetailView(LoginRequiredMixin, DetailView): # domyślnie zwraca obiekt o nazwie 'object', wtedy używam w template np.object.gender
     model = Profile
     template_name = 'users/profile.html'
-
-    def get_object(self): # służy do 'uchwycenia' obiektu
-        user = super().get_object()
-        return user
 
 class ProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile

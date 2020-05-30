@@ -1,0 +1,14 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Matches Page{% endblock %}
+
+{% block content %}
+    <h2>Your matches</h2>
+    {% for match in matches %}
+        {% if match.user1 == request.user %}
+            <p><a href="{% url 'profile' pk=match.user2.profile.pk %}">{{ match.user2 }}</a></p>
+        {% elif match.user2 == request.user %}
+            <p><a href="{% url 'profile' pk=match.user1.profile.pk %}">{{ match.user1 }}</a></p>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
