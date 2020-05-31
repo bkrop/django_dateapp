@@ -4,7 +4,7 @@
 
 {% block content %}
     <p>{{ profile.user.first_name }}</p>
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Update</button>

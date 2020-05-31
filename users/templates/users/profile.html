@@ -3,6 +3,7 @@
 {% block title %}Profile Page{% endblock %}
 
 {% block content %}
+    <img src="{{ object.avatar.url }}" alt="" width="125" height="125">
     <h1>{{ object.user.first_name }}'s Profile</h1>
     <p>Description: {{ object.description }}</p>
     <p>Gender: {{ object.gender }}</p>

@@ -19,8 +19,12 @@ class Profile(models.Model):
     date_of_birth = models.DateField(verbose_name='Date of birth', null=False, blank=False)
     gender = models.CharField(verbose_name='Gender', choices=GENDERS, max_length=10)
     description = models.TextField(null=True, blank=True, max_length=300)
+    avatar = models.ImageField(upload_to='media', default='default.jpg',
+            width_field='width_field', height_field='height_field')
+    width_field = models.IntegerField(default=125)
+    height_field = models.IntegerField(default=125)
     gender_pref = models.CharField(verbose_name='Show me', choices=SHOW_GENDERS, max_length=10,
-                                    default='Unspecified')
+            default='Unspecified')
 
     def get_age(self):
         today = date.today() 

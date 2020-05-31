@@ -42,7 +42,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView): # domyślnie zwraca obi
 class ProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile
     template_name = 'users/update_profile.html'
-    fields = ['description', 'gender_pref']
+    fields = ['description', 'gender_pref', 'avatar']
 
     def test_func(self):
         profile = self.get_object()
