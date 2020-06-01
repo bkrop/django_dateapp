@@ -10,5 +10,7 @@
     <p>Age: {{ object.get_age }}</p>
     {% if request.user.profile == object %}
         <small><a href="{% url 'update-profile' pk=request.user.profile.pk %}">Update profile</a></small>
+    {% else %}
+        <p><a href="{% url 'create_message' receiver_id=object.user.id %}">Chat</a></p>
     {% endif %}
 {% endblock %}

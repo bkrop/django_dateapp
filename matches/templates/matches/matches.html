@@ -4,11 +4,18 @@
 
 {% block content %}
     <h2>Your matches</h2>
-    {% for match in matches %}
-        {% if match.user1 == request.user %}
-            <p><a href="{% url 'profile' pk=match.user2.profile.pk %}">{{ match.user2 }}</a></p>
-        {% elif match.user2 == request.user %}
-            <p><a href="{% url 'profile' pk=match.user1.profile.pk %}">{{ match.user1 }}</a></p>
+    {% for match in my_matches %}
+        {% if match.id not in users %}
+            <img src="{{ match.profile.avatar.url }}" alt="" width="50" height="50">
+            <p><a href="{% url 'profile' pk=match.profile.pk %}">{{ match }}</a></p>
+        {% endif %}
+    {% endfor %}
+    <h2>Chats</h2>
+    {% for match in my_matches %}
+        {% if match.id in users %}
+            <img src="{{ match.profile.avatar.url }}" alt="" width="50" height="50">
+            <p><a href="{% url 'profile' pk=match.profile.pk %}">{{ match }}</a></p>
+            <p><a href="{% url 'create_message' receiver_id=match.id %}">Chat</a></p>
         {% endif %}
     {% endfor %}
 {% endblock %}

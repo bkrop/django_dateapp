@@ -1,0 +1,16 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Create message Page{% endblock %}
+
+{% block content %}
+    {% for message in messages %}
+        <p>{{ message.sender }}</p>
+        <p>{{ message.content }}</p>
+        <small>{{ message.date_of_create }}</small>
+    {% endfor %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create</button>
+    </form>
+{% endblock %}

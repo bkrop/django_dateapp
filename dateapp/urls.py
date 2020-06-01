@@ -22,8 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
     path('likes/', include('likes.urls')),
-    path('matches/', include('matches.urls'))
+    path('matches/', include('matches.urls')),
+    path('messages/', include('msgs.urls'))
 ]
 
 if settings.DEBUG:
-    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

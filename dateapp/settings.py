@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'likes.apps.LikesConfig',
     'matches.apps.MatchesConfig',
+    'msgs.apps.MsgsConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
