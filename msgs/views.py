@@ -3,6 +3,7 @@ from .models import Message
 from django.views.generic import CreateView, ListView
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.urls import reverse
 
 class MessageCreateView(CreateView):
     model = Message
@@ -20,3 +21,7 @@ class MessageCreateView(CreateView):
         receiver = User.objects.get(id=self.kwargs.get('receiver_id'))
         context['messages'] = Message.objects.filter(Q(sender=receiver, receiver=self.request.user)|Q(sender=self.request.user, receiver=receiver)).order_by('date_of_create')
         return context
+
+    def get_success_url(self):
+        receiver = User.objects.get(id=self.kwargs.get('receiver_id'))
+        return reverse('create_message', kwargs={'receiver_id': receiver.id})
